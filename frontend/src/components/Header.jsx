@@ -29,9 +29,16 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>NBA Stats App</Navbar.Brand>
-          </LinkContainer>
+          {userInfo ? (
+            <LinkContainer to="/NBA-App-Home">
+              <Navbar.Brand>NBA Stats App</Navbar.Brand>
+            </LinkContainer>
+          ) : (
+            <LinkContainer to="/">
+              <Navbar.Brand>NBA Stats App</Navbar.Brand>
+            </LinkContainer>
+          )}
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
