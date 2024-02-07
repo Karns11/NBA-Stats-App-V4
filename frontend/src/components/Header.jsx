@@ -62,7 +62,7 @@ const Header = () => {
                   </LinkContainer>
                   <LinkContainer to="/register">
                     <Nav.Link>
-                      <FaSignOutAlt /> Sign Up
+                      <FaSignOutAlt /> Register
                     </Nav.Link>
                   </LinkContainer>
                 </>

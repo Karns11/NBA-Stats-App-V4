@@ -17,6 +17,10 @@ const Hero = () => {
             Stay tuned for ongoing updates as we continue to introduce new
             features to elevate your user experience!
           </p>
+
+          <p className="text-center mb-4">
+            Create a free account to get started!
+          </p>
           <div className="d-flex">
             <Button variant="primary" href="/register" className="me-3">
               Register
