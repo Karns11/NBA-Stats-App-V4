@@ -31,11 +31,11 @@ const Header = () => {
         <Container>
           {userInfo ? (
             <LinkContainer to="/NBA-App-Home">
-              <Navbar.Brand>NBA Stats App</Navbar.Brand>
+              <Navbar.Brand>Alley-Oop Analytics</Navbar.Brand>
             </LinkContainer>
           ) : (
             <LinkContainer to="/">
-              <Navbar.Brand>NBA Stats App</Navbar.Brand>
+              <Navbar.Brand>Alley-Oop Analytics</Navbar.Brand>
             </LinkContainer>
           )}
 
@@ -55,14 +55,14 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <LinkContainer to="/login">
-                    <Nav.Link>
-                      <FaSignInAlt /> Sign In
-                    </Nav.Link>
-                  </LinkContainer>
                   <LinkContainer to="/register">
                     <Nav.Link>
                       <FaSignOutAlt /> Register
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <Nav.Link>
+                      <FaSignInAlt /> Sign In
                     </Nav.Link>
                   </LinkContainer>
                 </>

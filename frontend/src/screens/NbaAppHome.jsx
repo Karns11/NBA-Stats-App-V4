@@ -198,13 +198,17 @@ export default function Home() {
         <TodaysGames todaysOdds={todaysOdds} />
         {/* <h1 className='text-center pt-3'>{StartDateInput.substring(0,4)}-{endDateInput.substring(0,4)} Season Stats</h1> */}
         <div className="d-flex align-items-center justify-content-center">
-          <h5 className="text-center me-3">Odds Powered By</h5>
+          {todaysOdds.length > 0 && (
+            <h5 className="text-center me-3">Odds Powered By</h5>
+          )}
           <div>
-            <img className="dk-logo" src={DK} />
+            {todaysOdds.length > 0 && <img className="dk-logo" src={DK} />}
           </div>
         </div>
+        {todaysOdds.length > 0 && (
+          <div className="border border-dark mt-5 mb-3"></div>
+        )}
 
-        <div className="border border-dark mt-5 mb-3"></div>
         <h1 id="NBA-Stats" className="text-center pt-4">
           NBA Player Stats{" "}
         </h1>
@@ -268,15 +272,15 @@ export default function Home() {
         />
         {stats.length === 0 ? (
           <p className="text-center welcome-text">
-            Welcome to my NBA Player Stats web application! This platform is
-            crafted to enhance your sports betting decisions by providing
-            comprehensive insights into NBA player statistics. Simply begin by
-            typing the name of any NBA player, and select from the dropdown
-            menu. To further refine your search, specify a start date to narrow
-            down the selection of games you want to view. Opt for the season
-            average checkbox if you wish to explore a player's season averages.
-            Stay tuned for ongoing updates as we continue to introduce new
-            features to elevate your user experience!
+            Welcome to Alley-Oop Analytics! This platform is crafted to enhance
+            your sports betting decisions by providing comprehensive insights
+            into NBA player statistics. Simply begin by typing the name of any
+            NBA player, and select from the dropdown menu. To further refine
+            your search, specify a start date to narrow down the selection of
+            games you want to view. Opt for the season average checkbox if you
+            wish to explore a player's season averages. Stay tuned for ongoing
+            updates as we continue to introduce new features to elevate your
+            user experience!
           </p>
         ) : (
           <Table

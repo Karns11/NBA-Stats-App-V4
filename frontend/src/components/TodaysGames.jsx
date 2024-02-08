@@ -24,8 +24,11 @@ const TodaysGames = ({ todaysOdds }) => {
   return (
     <div>
       <h1 className="text-center mt-3">Week {weekNum}</h1>
-      <h5 className="ml-3 pb-4">Upcoming Games </h5>
-      <h5 className="ml-3 pb-4">{newFormattedDate}</h5>
+      {todaysOdds.lenth > 0 && <h5 className="ml-3 pb-4">Upcoming Games </h5>}
+
+      {todaysOdds.lenth > 0 && (
+        <h5 className="ml-3 pb-4">{newFormattedDate}</h5>
+      )}
       <div className="container">
         <div className="row">
           {/* {todaysOdds &&
