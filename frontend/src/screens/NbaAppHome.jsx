@@ -34,7 +34,7 @@ export default function Home() {
   //const [todaysGames, setTodaysGames] = useState([]);
   const [todaysOdds, setTodaysOdds] = useState([]);
 
-  const ODDS_API_KEY = "ba4bcf39afc418e600c36b136b2bc55c";
+  const ODDS_API_KEY = "26a20b6907ac366728bf4bfc5aa2852c";
   const currentDate2 = new Date();
   currentDate2.setDate(currentDate2.getDate() + 1);
   const usefulFormattedDate = currentDate2.toISOString().substring(0, 10);
