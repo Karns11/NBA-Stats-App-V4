@@ -7,10 +7,13 @@ import connectDB from "./config/db.js";
 const port = process.env.PORT || 5000;
 import userRoutes from "./routes/userRoutes.js";
 import path from "path";
+import cors from "cors";
 
 connectDB();
 
 const app = express();
+
+app.use(cors()); // Enable CORS for all routes
 
 //These two lines allow use to send form data and parse the req.body that is being sent.
 //if we didn't add this, then for ex, when we make a post request to our register route with nothing in the body, we get undefined

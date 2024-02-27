@@ -21,7 +21,7 @@ import React from "react";
 //   )
 // }
 
-function PlayerInput({ input, setInput, setStats, setPlayer }) {
+function PlayerInput({ input, setInput, setStats, setPlayer, setPlayerTitle }) {
   return (
     <div className="column my-2">
       <div className="input-group px-5 mb-1">
@@ -38,6 +38,7 @@ function PlayerInput({ input, setInput, setStats, setPlayer }) {
             setInput("");
             setStats([]);
             setPlayer([]);
+            setPlayerTitle([]);
           }}
           className="ml-2 btn btn-danger"
         >

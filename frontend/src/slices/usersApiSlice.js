@@ -89,6 +89,33 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    SearchPlayer: builder.mutation({
+      query: (basketball_player) => ({
+        url: `${USERS_URL}/searchplayer`,
+        method: "POST", // Changed method to POST
+        body: basketball_player, // Sending player information in the body
+      }),
+    }),
+    PlayerStats: builder.mutation({
+      query: (playerData) => ({
+        url: `${USERS_URL}/playerstats`,
+        method: "POST", // Changed method to POST
+        body: playerData, // Sending player information in the body
+      }),
+    }),
+    playerSeasonAvg: builder.mutation({
+      query: (playerAvgData) => ({
+        url: `${USERS_URL}/playerseasonavg`,
+        method: "POST", // Changed method to POST
+        body: playerAvgData, // Sending player information in the body
+      }),
+    }),
+    allTeams: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/teams`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -112,4 +139,8 @@ export const {
   useAddToNewsletterMutation,
   useGetApiKeyQuery,
   useUpdateUserMutation,
+  useSearchPlayerMutation,
+  usePlayerStatsMutation,
+  usePlayerSeasonAvgMutation,
+  useAllTeamsMutation,
 } = usersApiSlice;

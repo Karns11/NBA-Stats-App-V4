@@ -23,13 +23,14 @@ function Search({
   handleLastFiveChecked,
   handleHomeAwayChecked,
   isHomeAwayChecked,
+  player,
 }) {
   return (
     <div>
       <div className="column">
         <button
           className="mt-3 mb-2 btn btn-primary"
-          disabled={input.length < 3 ? true : isButtonDisabled}
+          disabled={!player ? true : isButtonDisabled}
           onClick={handleSearch}
         >
           Search for stats!

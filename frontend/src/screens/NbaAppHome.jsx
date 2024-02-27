@@ -1,3 +1,5 @@
+//NEED TO FIX SLICE TO SEARCH FOR PLAYER. THE BACKEND CODE IS WORKING FINE
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "../components/Table.jsx";
@@ -10,9 +12,18 @@ import LastFiveAvg from "../components/LastFiveAvg.jsx";
 import TodaysGames from "../components/TodaysGames.jsx";
 import HomeAwayTable from "../components/HomeAwayTable.jsx";
 import DK from "../assets/DKLogo.png";
+import { useSearchPlayerMutation } from "../slices/usersApiSlice";
+import { usePlayerStatsMutation } from "../slices/usersApiSlice";
+import { usePlayerSeasonAvgMutation } from "../slices/usersApiSlice";
+import { useAllTeamsMutation } from "../slices/usersApiSlice";
 
 export default function Home() {
   const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1; // Months are zero-based, so we add 1 to get the actual month number
+  const currentYear = currentDate.getFullYear();
+
+  const displayYear =
+    currentMonth >= 1 && currentMonth <= 8 ? currentYear - 1 : currentYear;
 
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -21,8 +32,10 @@ export default function Home() {
 
   const [stats, setStats] = useState([]);
   const [player, setPlayer] = useState([]);
+  const [playerTitle, setPlayerTitle] = useState([]);
+  //const [playerId, setPlayerId] = useState("");
   const [input, setInput] = useState("");
-  const [StartDateInput, setStartDateInput] = useState("2023-10-24");
+  const [StartDateInput, setStartDateInput] = useState("2023-10-24"); //need to update very year!!!!
   const [endDateInput, setEndDateInput] = useState(formattedDate);
   const [isChecked, setIsChecked] = useState(false);
   const [isLastFiveChecked, setIsLastFiveChecked] = useState(false);
@@ -34,7 +47,7 @@ export default function Home() {
   //const [todaysGames, setTodaysGames] = useState([]);
   const [todaysOdds, setTodaysOdds] = useState([]);
 
-  const ODDS_API_KEY = "26a20b6907ac366728bf4bfc5aa2852c";
+  const ODDS_API_KEY = "216f6eccca571511c81d63a2f4795d07";
   const currentDate2 = new Date();
   currentDate2.setDate(currentDate2.getDate() + 1);
   const usefulFormattedDate = currentDate2.toISOString().substring(0, 10);
@@ -45,59 +58,111 @@ export default function Home() {
   const usefulFromDate = currentDate3.toISOString().substring(0, 10);
   //console.log(usefulFromDate)
 
-  function handleSearch(event) {
-    event.preventDefault();
+  const [searchPlayer, { isLoading, error }] = useSearchPlayerMutation();
+  const [playerStats, { isLoadingStats, errorStats }] =
+    usePlayerStatsMutation();
+  const [playerSeasonAvg, { isLoadingSeasonAvg, errorSeasonAvg }] =
+    usePlayerSeasonAvgMutation();
+  const [allteams, { isLoadingAllTeams, errorAllTeams }] =
+    useAllTeamsMutation();
+
+  const handleSearch_2 = async () => {
+    try {
+      //console.log(player);
+      //const result = await searchPlayer({ basketball_player: input });
+      //console.log(result.data.data);
+      // setPlayer([
+      //   result.data.data[0].first_name,
+      //   result.data.data[0].last_name,
+      // ]);
+      if (player) {
+        const playerData = {
+          playerId: player.id,
+          StartDateInput,
+        };
+        const result_stats = await playerStats(playerData);
+        console.log(isLoadingStats);
+        //console.log(result_stats.data.data);
+        setStats(result_stats.data.data);
+        //console.log(isLoadingStats);
+
+        const playerAvgData = {
+          playerId: player.id,
+          season: displayYear,
+        };
+        const result_seasonAvg = await playerSeasonAvg(playerAvgData);
+        //console.log(result_seasonAvg.data.data);
+        setAverages(result_seasonAvg.data.data[0]);
+
+        const result_allTeams = await allteams();
+        //console.log(result_allTeams.data.data);
+        setTeams(result_allTeams.data.data);
+      }
+
+      setIsButtonDisabled(true);
+      setPlayerTitle(player);
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (input.length > 0) {
+  //     handleSearch_2();
+  //   }
+  // }, [input]); // Empty dependency array ensures useEffect runs only once
+
+  async function handleSearch() {
+    //event.preventDefault();
     if (input.length > 0) {
-      axios
-        .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
-        .then((response) => {
-          setPlayer([
-            response.data.data[0].first_name,
-            response.data.data[0].last_name,
-          ]);
-          const playerId = response.data.data[0].id;
-          return axios.get(
-            `https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&per_page=100&start_date=${StartDateInput}`
-          ); //&end_date=${endDateInput} if necessary.
-        })
-        .then((response) => {
-          const responseStats = response.data.data;
-          setStats(responseStats);
-          //console.log(responseStats);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      axios
-        .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
-        .then((response) => {
-          setPlayer([
-            response.data.data[0].first_name,
-            response.data.data[0].last_name,
-          ]);
-          const playerId = response.data.data[0].id;
-          return axios.get(
-            `https://www.balldontlie.io/api/v1/season_averages/?player_ids[]=${playerId}`
-          );
-        })
-        .then((res) => {
-          const resAvgs = res.data.data[0];
-          //console.log(resAvgs.fg_pct);
-          setAverages(resAvgs); //object
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      axios
-        .get("https://www.balldontlie.io/api/v1/teams")
-        .then((response) => {
-          setTeams(response.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // axios
+      //   .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
+      //   .then((response) => {
+      //     setPlayer([
+      //       response.data.data[0].first_name,
+      //       response.data.data[0].last_name,
+      //     ]);
+      //     const playerId = response.data.data[0].id;
+      //     return axios.get(
+      //       `https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&per_page=100&start_date=${StartDateInput}`
+      //     ); //&end_date=${endDateInput} if necessary.
+      //   })
+      //   .then((response) => {
+      //     const responseStats = response.data.data;
+      //     setStats(responseStats);
+      //     //console.log(responseStats);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // axios
+      //   .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
+      //   .then((response) => {
+      //     setPlayer([
+      //       response.data.data[0].first_name,
+      //       response.data.data[0].last_name,
+      //     ]);
+      //     const playerId = response.data.data[0].id;
+      //     return axios.get(
+      //       `https://www.balldontlie.io/api/v1/season_averages/?player_ids[]=${playerId}`
+      //     );
+      //   })
+      //   .then((res) => {
+      //     const resAvgs = res.data.data[0];
+      //     //console.log(resAvgs.fg_pct);
+      //     setAverages(resAvgs); //object
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // axios
+      //   .get("https://www.balldontlie.io/api/v1/teams")
+      //   .then((response) => {
+      //     setTeams(response.data.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
       // setAllPlayers([])
     }
   }
@@ -129,7 +194,7 @@ export default function Home() {
   //const todays_date = "2024-01-16"
 
   // const handleAllPlayerSearch= (input)=> {
-  //     axios.get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
+  //     axios.get(`http://api.balldontlie.io/v1/players?search=${input}`)
   //     .then(response => {
   //       setAllPlayers(response.data.data)
   //       console.log(allPlayers)
@@ -139,38 +204,37 @@ export default function Home() {
   //     })
   // }
 
+  // const handleAllPlayerSearch = async (input) => {
+  //   try {
+  //     const result_allPlayers = await searchPlayer({
+  //       basketball_player: input,
+  //     });
+  //     //console.log(result_allPlayers.data.data);
+  //     setAllPlayers([result_allPlayers.data.data]);
+  //   } catch (error) {
+  //     console.error("Error occurred:", error);
+  //   }
+  // };
+
   useEffect(() => {
-    const handleAllPlayerSearch = (input) => {
-      axios
-        .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
-        .then((response) => {
-          setAllPlayers(response.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
+    const handleAllPlayerSearch = async (input) => {
+      try {
+        const result_allPlayers = await searchPlayer({
+          basketball_player: input,
         });
+        //console.log(result_allPlayers.data.data);
+        setAllPlayers([result_allPlayers.data.data]);
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
     };
-    if (input) {
+    if (input.length > 3) {
       handleAllPlayerSearch(input);
     } else {
       setAllPlayers([]);
     }
     // eslint-disable-next-line
   }, [input]);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://www.balldontlie.io/api/v1/games?start_date=${formattedDate}&end_date=${formattedDate}`
-      )
-      .then((response) => {
-        console.log(response.data.data);
-        //setTodaysGames(response.data.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [formattedDate]);
 
   useEffect(() => {
     axios
@@ -220,6 +284,7 @@ export default function Home() {
             setPlayer={setPlayer}
             input={input}
             setInput={setInput}
+            setPlayerTitle={setPlayerTitle}
           />
           <DateInput
             handleEndDateReset={handleEndDateReset}
@@ -234,6 +299,12 @@ export default function Home() {
             input={input}
             allPlayers={allPlayers}
             setInput={setInput}
+            setPlayer={setPlayer}
+            setAllPlayers={setAllPlayers}
+            setPlayerTitle={setPlayerTitle}
+            playerTitle={playerTitle}
+            player={player}
+            isLoading={isLoading}
           />
           <Search
             input={input}
@@ -242,9 +313,10 @@ export default function Home() {
             handleChecked={handleChecked}
             isLastFiveChecked={isLastFiveChecked}
             handleLastFiveChecked={handleLastFiveChecked}
-            handleSearch={handleSearch}
+            handleSearch={handleSearch_2}
             isHomeAwayChecked={isHomeAwayChecked}
             handleHomeAwayChecked={handleHomeAwayChecked}
+            player={player}
           />
           <div className="border border-dark mt-3"></div>
         </div>
@@ -254,6 +326,7 @@ export default function Home() {
           isChecked={isChecked}
           averages={averages}
           player={player}
+          playerTitle={playerTitle}
         />
         <HomeAwayTable
           averages={averages}
@@ -261,6 +334,7 @@ export default function Home() {
           stats={stats}
           isHomeAwayChecked={isHomeAwayChecked}
           handleHomeAwayChecked={handleHomeAwayChecked}
+          playerTitle={playerTitle}
         />
         <LastFiveAvg
           averages={averages}
@@ -269,6 +343,7 @@ export default function Home() {
           stats={stats}
           isLastFiveChecked={isLastFiveChecked}
           player={player}
+          playerTitle={playerTitle}
         />
         {stats.length === 0 ? (
           <p className="text-center welcome-text">
@@ -289,6 +364,9 @@ export default function Home() {
             teams={teams}
             player={player}
             stats={stats}
+            playerTitle={playerTitle}
+            isLoadingStats={isLoadingStats}
+            isLoadingAllTeams={isLoadingAllTeams}
           />
         )}
       </div>

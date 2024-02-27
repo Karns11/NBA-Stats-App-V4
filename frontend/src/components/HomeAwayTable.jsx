@@ -1,6 +1,12 @@
 import React from "react";
 
-const HomeAwayTable = ({ stats, isHomeAwayChecked, player, averages }) => {
+const HomeAwayTable = ({
+  stats,
+  isHomeAwayChecked,
+  player,
+  averages,
+  playerTitle,
+}) => {
   if (isHomeAwayChecked && stats && stats.length > 0) {
     const AvgHomePts = (() => {
       const homeStats = stats.filter(
@@ -219,9 +225,9 @@ const HomeAwayTable = ({ stats, isHomeAwayChecked, player, averages }) => {
     return (
       <div id="Home-Away-Table">
         <div className="mt-5 text-center">
-          {player.length === 2 && (
+          {playerTitle && (
             <h2>
-              {player[0]} {player[1]} Home Averages
+              {playerTitle.first_name} {playerTitle.last_name} Home Averages
             </h2>
           )}
         </div>
@@ -344,9 +350,9 @@ const HomeAwayTable = ({ stats, isHomeAwayChecked, player, averages }) => {
           </table>
 
           <div className="mt-5 text-center">
-            {player.length === 2 && (
+            {playerTitle && (
               <h2>
-                {player[0]} {player[1]} Away Averages
+                {playerTitle.first_name} {playerTitle.last_name} Away Averages
               </h2>
             )}
           </div>

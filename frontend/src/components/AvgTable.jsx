@@ -1,13 +1,15 @@
 import React from "react";
 
-function AvgTable({ averages, player, isChecked, stats, year }) {
+function AvgTable({ averages, player, isChecked, stats, year, playerTitle }) {
   if (isChecked && stats.length > 0) {
+    //console.log(averages);
     return (
       <div id="Avg-table">
         <div className="mt-5 text-center">
-          {player.length === 2 && (
+          {playerTitle && (
             <h2>
-              {player[0]} {player[1]} {year - 1}-{year} Averages
+              {playerTitle.first_name} {playerTitle.last_name} {year - 1}-{year}{" "}
+              Averages
             </h2>
           )}
         </div>
