@@ -16,6 +16,7 @@ import { useSearchPlayerMutation } from "../slices/usersApiSlice";
 import { usePlayerStatsMutation } from "../slices/usersApiSlice";
 import { usePlayerSeasonAvgMutation } from "../slices/usersApiSlice";
 import { useAllTeamsMutation } from "../slices/usersApiSlice";
+import Loader from "../components/Loader.jsx";
 
 export default function Home() {
   const currentDate = new Date();
@@ -46,6 +47,7 @@ export default function Home() {
   const [allPlayers, setAllPlayers] = useState([]);
   //const [todaysGames, setTodaysGames] = useState([]);
   const [todaysOdds, setTodaysOdds] = useState([]);
+  const [loadingStats, setLoadingStats] = useState(false);
 
   const ODDS_API_KEY = "216f6eccca571511c81d63a2f4795d07";
   const currentDate2 = new Date();
@@ -66,6 +68,8 @@ export default function Home() {
   const [allteams, { isLoadingAllTeams, errorAllTeams }] =
     useAllTeamsMutation();
 
+  //console.log(loadingStats);
+
   const handleSearch_2 = async () => {
     try {
       //console.log(player);
@@ -80,11 +84,13 @@ export default function Home() {
           playerId: player.id,
           StartDateInput,
         };
+        setLoadingStats(true);
         const result_stats = await playerStats(playerData);
-        //console.log(isLoadingStats);
-        //console.log(result_stats.data.data);
+        setLoadingStats(false);
         setStats(result_stats.data.data);
         //console.log(isLoadingStats);
+
+        setPlayerTitle(player);
 
         const playerAvgData = {
           playerId: player.id,
@@ -100,7 +106,6 @@ export default function Home() {
       }
 
       setIsButtonDisabled(true);
-      setPlayerTitle(player);
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -278,6 +283,8 @@ export default function Home() {
             updates as we continue to introduce new features to elevate your
             user experience!
           </p>
+        ) : loadingStats == true ? (
+          <Loader />
         ) : (
           <Table
             averages={averages}
@@ -288,6 +295,7 @@ export default function Home() {
             playerTitle={playerTitle}
             isLoadingStats={isLoadingStats}
             isLoadingAllTeams={isLoadingAllTeams}
+            loadingStats={loadingStats}
           />
         )}
       </div>
