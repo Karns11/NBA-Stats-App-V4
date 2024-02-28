@@ -184,13 +184,20 @@ function StatsTable({
     a.game.date > b.game.date ? -1 : 1
   );
   //console.log(isLoadingAllTeams);
+  //console.log(playerTitle.length);
 
   return (
     <div id="Stats-table" className="pb-5">
       <div className="text-center">
         {playerTitle && (
           <h2 className="mt-5">
-            {playerTitle.first_name} {playerTitle.last_name} Box Scores
+            <span style={{ display: "inline-block" }}>
+              {playerTitle.length === 0 ? (
+                <Loader size={45} />
+              ) : (
+                `${playerTitle.first_name} ${playerTitle.last_name} Box Scores`
+              )}
+            </span>
           </h2>
         )}
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "./Loader";
 
 function AvgTable({ averages, player, isChecked, stats, year, playerTitle }) {
   if (isChecked && stats.length > 0) {
@@ -7,9 +8,14 @@ function AvgTable({ averages, player, isChecked, stats, year, playerTitle }) {
       <div id="Avg-table">
         <div className="mt-5 text-center">
           {playerTitle && (
-            <h2>
-              {playerTitle.first_name} {playerTitle.last_name} {year - 1}-{year}{" "}
-              Averages
+            <h2 className="mt-5">
+              <span style={{ display: "inline-block" }}>
+                {playerTitle.length === 0 ? (
+                  <Loader size={45} />
+                ) : (
+                  `${playerTitle.first_name} ${playerTitle.last_name} Averages`
+                )}
+              </span>
             </h2>
           )}
         </div>

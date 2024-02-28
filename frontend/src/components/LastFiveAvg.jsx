@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "./Loader";
 
 const LastFiveAvg = ({
   stats,
@@ -127,9 +128,14 @@ const LastFiveAvg = ({
       <div id="L5Avg-table">
         <div className="mt-5 text-center">
           {playerTitle && (
-            <h2>
-              {playerTitle.first_name} {playerTitle.last_name} Last 5 GP
-              Averages
+            <h2 className="mt-5">
+              <span style={{ display: "inline-block" }}>
+                {playerTitle.length === 0 ? (
+                  <Loader size={45} />
+                ) : (
+                  `${playerTitle.first_name} ${playerTitle.last_name} Last 5 GP Averages`
+                )}
+              </span>{" "}
             </h2>
           )}
         </div>

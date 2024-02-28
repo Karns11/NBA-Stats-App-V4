@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "./Loader";
 
 const HomeAwayTable = ({
   stats,
@@ -226,8 +227,14 @@ const HomeAwayTable = ({
       <div id="Home-Away-Table">
         <div className="mt-5 text-center">
           {playerTitle && (
-            <h2>
-              {playerTitle.first_name} {playerTitle.last_name} Home Averages
+            <h2 className="mt-5">
+              <span style={{ display: "inline-block" }}>
+                {playerTitle.length === 0 ? (
+                  <Loader size={45} />
+                ) : (
+                  `${playerTitle.first_name} ${playerTitle.last_name} Home Averages`
+                )}
+              </span>
             </h2>
           )}
         </div>
@@ -351,8 +358,14 @@ const HomeAwayTable = ({
 
           <div className="mt-5 text-center">
             {playerTitle && (
-              <h2>
-                {playerTitle.first_name} {playerTitle.last_name} Away Averages
+              <h2 className="mt-5">
+                <span style={{ display: "inline-block" }}>
+                  {playerTitle.length === 0 ? (
+                    <Loader size={45} />
+                  ) : (
+                    `${playerTitle.first_name} ${playerTitle.last_name} Away Averages`
+                  )}
+                </span>
               </h2>
             )}
           </div>

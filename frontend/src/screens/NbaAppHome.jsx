@@ -81,7 +81,7 @@ export default function Home() {
           StartDateInput,
         };
         const result_stats = await playerStats(playerData);
-        console.log(isLoadingStats);
+        //console.log(isLoadingStats);
         //console.log(result_stats.data.data);
         setStats(result_stats.data.data);
         //console.log(isLoadingStats);
@@ -112,61 +112,6 @@ export default function Home() {
   //   }
   // }, [input]); // Empty dependency array ensures useEffect runs only once
 
-  async function handleSearch() {
-    //event.preventDefault();
-    if (input.length > 0) {
-      // axios
-      //   .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
-      //   .then((response) => {
-      //     setPlayer([
-      //       response.data.data[0].first_name,
-      //       response.data.data[0].last_name,
-      //     ]);
-      //     const playerId = response.data.data[0].id;
-      //     return axios.get(
-      //       `https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&per_page=100&start_date=${StartDateInput}`
-      //     ); //&end_date=${endDateInput} if necessary.
-      //   })
-      //   .then((response) => {
-      //     const responseStats = response.data.data;
-      //     setStats(responseStats);
-      //     //console.log(responseStats);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // axios
-      //   .get(`https://www.balldontlie.io/api/v1/players?search=${input}`)
-      //   .then((response) => {
-      //     setPlayer([
-      //       response.data.data[0].first_name,
-      //       response.data.data[0].last_name,
-      //     ]);
-      //     const playerId = response.data.data[0].id;
-      //     return axios.get(
-      //       `https://www.balldontlie.io/api/v1/season_averages/?player_ids[]=${playerId}`
-      //     );
-      //   })
-      //   .then((res) => {
-      //     const resAvgs = res.data.data[0];
-      //     //console.log(resAvgs.fg_pct);
-      //     setAverages(resAvgs); //object
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // axios
-      //   .get("https://www.balldontlie.io/api/v1/teams")
-      //   .then((response) => {
-      //     setTeams(response.data.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // setAllPlayers([])
-    }
-  }
-
   const handleStartDateReset = () => {
     setStartDateInput("2023-01-01");
   };
@@ -192,29 +137,6 @@ export default function Home() {
   };
 
   //const todays_date = "2024-01-16"
-
-  // const handleAllPlayerSearch= (input)=> {
-  //     axios.get(`http://api.balldontlie.io/v1/players?search=${input}`)
-  //     .then(response => {
-  //       setAllPlayers(response.data.data)
-  //       console.log(allPlayers)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }
-
-  // const handleAllPlayerSearch = async (input) => {
-  //   try {
-  //     const result_allPlayers = await searchPlayer({
-  //       basketball_player: input,
-  //     });
-  //     //console.log(result_allPlayers.data.data);
-  //     setAllPlayers([result_allPlayers.data.data]);
-  //   } catch (error) {
-  //     console.error("Error occurred:", error);
-  //   }
-  // };
 
   useEffect(() => {
     const handleAllPlayerSearch = async (input) => {
@@ -279,7 +201,6 @@ export default function Home() {
 
         <div className="row text-center my-5">
           <PlayerInput
-            handleSearch={handleSearch}
             setStats={setStats}
             setPlayer={setPlayer}
             input={input}
