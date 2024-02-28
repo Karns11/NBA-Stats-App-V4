@@ -14,7 +14,7 @@ const SearchResults = ({
   player,
   isLoading,
 }) => {
-  //console.log(allPlayers);
+  //console.log(player);
 
   return (
     //     <div className='table-container d-flex align-items-center justify-content-center w-100'>
@@ -61,7 +61,7 @@ const SearchResults = ({
         <Loader />
       ) : (
         <div className="container">
-          {allPlayers[0] && allPlayers[0].length > 0 && input.length > 2 ? (
+          {allPlayers[0] && allPlayers[0].length > 0 && input.length > 3 ? (
             <div className="row justify-content-center">
               <div className="col-md-8">
                 <table className="table">
@@ -70,7 +70,7 @@ const SearchResults = ({
                       <th scope="col">First</th>
                       <th scope="col">Last</th>
                       <th scope="col">Team</th>
-                      {/* <th scope="col">POS</th> */}
+                      <th scope="col">POS</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,7 +96,7 @@ const SearchResults = ({
                           <td className="column-cell">
                             {player.team.abbreviation}
                           </td>
-                          {/* <td className="column-cell">{player.position}</td> */}
+                          <td className="column-cell">{player.position}</td>
                         </tr>
                       );
                     })}
@@ -115,7 +115,7 @@ const SearchResults = ({
                         <th scope="col">First</th>
                         <th scope="col">Last</th>
                         <th scope="col">Team</th>
-                        {/* <th scope="col">POS</th> */}
+                        <th scope="col">POS</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -123,8 +123,9 @@ const SearchResults = ({
                         <td className="column-cell">{player.first_name}</td>
                         <td className="column-cell">{player.last_name}</td>
                         <td className="column-cell">
-                          {/* {playerTitle.team.abbreviation} */}
+                          {player.team.abbreviation}
                         </td>
+                        <td className="column-cell">{player.position}</td>
                       </tr>
                     </tbody>
                   </table>
