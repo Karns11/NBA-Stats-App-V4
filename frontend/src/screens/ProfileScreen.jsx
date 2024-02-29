@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
+import BasicLinePlot from "../components/BasicLinePlot";
 
 const ProfileScreen = () => {
   const [email, setEmail] = useState("");

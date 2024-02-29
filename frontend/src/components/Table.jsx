@@ -188,7 +188,7 @@ function StatsTable({
 
   return (
     <>
-      <div id="Stats-table" className="pb-5">
+      <div id="Stats-table">
         <div className="text-center">
           {playerTitle && (
             <h2 className="mt-5">

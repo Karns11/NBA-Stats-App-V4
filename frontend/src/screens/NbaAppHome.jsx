@@ -17,6 +17,10 @@ import { usePlayerStatsMutation } from "../slices/usersApiSlice";
 import { usePlayerSeasonAvgMutation } from "../slices/usersApiSlice";
 import { useAllTeamsMutation } from "../slices/usersApiSlice";
 import Loader from "../components/Loader.jsx";
+import BasicLinePlot from "../components/BasicLinePlot.jsx";
+import RebLinePlot from "../components/RebLinePlot.jsx";
+import AstLinePlot from "../components/AstLinePlot.jsx";
+import FgaLinePlot from "../components/FgaLinePlot.jsx";
 
 export default function Home() {
   const currentDate = new Date();
@@ -276,12 +280,10 @@ export default function Home() {
             Welcome to Alley-Oop Analytics! This platform is crafted to enhance
             your sports betting decisions by providing comprehensive insights
             into NBA player statistics. Simply begin by typing the name of any
-            NBA player, and select from the dropdown menu. To further refine
-            your search, specify a start date to narrow down the selection of
-            games you want to view. Opt for the season average checkbox if you
-            wish to explore a player's season averages. Stay tuned for ongoing
-            updates as we continue to introduce new features to elevate your
-            user experience!
+            NBA player, and select from the dropdown menu. Stay tuned for
+            ongoing updates as we continue to introduce new features to elevate
+            your user experience! *Don't forget to view the visualizations that
+            generate beneath the stats table!
           </p>
         ) : loadingStats == true ? (
           <Loader />
@@ -298,6 +300,51 @@ export default function Home() {
             loadingStats={loadingStats}
           />
         )}
+        {stats.length > 0 && <h1 className="text-center">Visualizations</h1>}
+      </div>
+      <div className="text-center">
+        <div className="row text-center">
+          <div className="col-lg-6 text-center">
+            <div className="text-center" style={{ overflow: "auto" }}>
+              <BasicLinePlot
+                averages={averages}
+                stats={stats}
+                playerTitle={playerTitle}
+              />
+            </div>
+          </div>
+          <div className="col-lg-6 text-center">
+            <div className="text-center" style={{ overflow: "auto" }}>
+              <RebLinePlot
+                averages={averages}
+                stats={stats}
+                playerTitle={playerTitle}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row text-center">
+          <div className="col-lg-6 text-center">
+            <div className="text-center" style={{ overflow: "auto" }}>
+              <AstLinePlot
+                averages={averages}
+                stats={stats}
+                playerTitle={playerTitle}
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-6 text-center">
+            <div className="text-center" style={{ overflow: "auto" }}>
+              <FgaLinePlot
+                averages={averages}
+                stats={stats}
+                playerTitle={playerTitle}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

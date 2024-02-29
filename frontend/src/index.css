@@ -4,7 +4,7 @@ html {
 }
 
 .welcome-text {
-  min-height: 50vh;
+  min-height: 20vh;
   /* padding-bottom: 50rem; */
 }
 
@@ -119,9 +119,9 @@ body {
 }
 
 .table-div-main {
-  max-height: 200vh;
+  max-height: 65vh;
   overflow-y: auto;
-  margin-bottom: 15rem;
+  margin-bottom: 5rem;
 }
 
 .opp-team-cell {
