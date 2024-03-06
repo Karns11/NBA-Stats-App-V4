@@ -112,7 +112,7 @@ const TodaysGames = ({ todaysOdds }) => {
               awayTeamOutcome && homeTeamOutcome ? (
                 <div>
                   <div className="d-flex justify-content-between">
-                    <div>
+                    <div className="mt-2">
                       <p className="text-dark">{match.away_team}</p>
                     </div>
                     <div className="d-flex">
@@ -125,7 +125,7 @@ const TodaysGames = ({ todaysOdds }) => {
                     </div>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <div>
+                    <div className="mt-2">
                       <p className="text-dark">{match.home_team}</p>
                     </div>
                     <div className="d-flex">
