@@ -1,4 +1,5 @@
 import React from "react";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 // function Search({ handleSearch, isChecked, handleChecked }) {
 //   return (
@@ -24,7 +25,43 @@ function Search({
   handleHomeAwayChecked,
   isHomeAwayChecked,
   player,
+  stats,
+  teamStats,
+  setTeamStats,
 }) {
+  const NBA_TEAMS = [
+    "Atlanta Hawks",
+    "Boston Celtics",
+    "Brooklyn Nets",
+    "Charlotte Hornets",
+    "Chicago Bulls",
+    "Cleveland Cavaliers",
+    "Dallas Mavericks",
+    "Denver Nuggets",
+    "Detroit Pistons",
+    "Golden State Warriors",
+    "Houston Rockets",
+    "Indiana Pacers",
+    "LA Clippers",
+    "Los Angeles Lakers",
+    "Memphis Grizzlies",
+    "Miami Heat",
+    "Milwaukee Bucks",
+    "Minnesota Timberwolves",
+    "New Orleans Pelicans",
+    "New York Knicks",
+    "Oklahoma City Thunder",
+    "Orlando Magic",
+    "Philadelphia 76ers",
+    "Phoenix Suns",
+    "Portland Trail Blazers",
+    "Sacramento Kings",
+    "San Antonio Spurs",
+    "Toronto Raptors",
+    "Utah Jazz",
+    "Washington Wizards",
+  ];
+
   return (
     <div>
       <div className="column">
@@ -69,6 +106,22 @@ function Search({
           Show Last 5 GP Averages
         </label>
       </div>
+      {stats && stats.length > 0 && (
+        <div className="mt-2">
+          <DropdownButton
+            data-bs-theme="dark"
+            id="dropdown-basic-button"
+            title="Player stats vs. team"
+            variant="secondary"
+          >
+            {NBA_TEAMS.map((team, index) => (
+              <Dropdown.Item onClick={() => setTeamStats(team)} key={index}>
+                {team}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+        </div>
+      )}
     </div>
   );
 }

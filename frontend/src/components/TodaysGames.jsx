@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodaysGames = ({ todaysOdds }) => {
-  let weekNum = 19;
+  let weekNum = 20;
 
   const currentDate = new Date();
 
@@ -20,6 +20,8 @@ const TodaysGames = ({ todaysOdds }) => {
   };
 
   const newFormattedDate = currentDate2.toLocaleDateString("en-US", options);
+
+  //console.log(todaysOdds);
 
   return (
     <div>
@@ -56,6 +58,20 @@ const TodaysGames = ({ todaysOdds }) => {
                 (outcome) => outcome.name === match.home_team
               );
 
+            const awayTeamSpreadOutcome =
+              match.bookmakers[0].markets[1].outcomes.find(
+                (outcome) => outcome.name === match.away_team
+              );
+
+            //console.log(awayTeamSpreadOutcome);
+
+            const homeTeamSpreadOutcome =
+              match.bookmakers[0].markets[1].outcomes.find(
+                (outcome) => outcome.name === match.home_team
+              );
+
+            //console.log(homeTeamSpreadOutcome);
+
             // Check if both outcome objects are found
             const displayAwayTeamOdds =
               awayTeamOutcome && awayTeamOutcome.price >= 0
@@ -64,6 +80,8 @@ const TodaysGames = ({ todaysOdds }) => {
                 ? `${awayTeamOutcome.price}`
                 : "Outcome not found";
 
+            //console.log(displayAwayTeamOdds);
+
             const displayHomeTeamOdds =
               homeTeamOutcome && homeTeamOutcome.price >= 0
                 ? `+${homeTeamOutcome.price}`
@@ -71,16 +89,55 @@ const TodaysGames = ({ todaysOdds }) => {
                 ? `${homeTeamOutcome.price}`
                 : "Outcome not found";
 
+            const displayAwayTeamSpread =
+              awayTeamSpreadOutcome && awayTeamSpreadOutcome.point >= 0
+                ? `+${awayTeamSpreadOutcome.point}`
+                : awayTeamSpreadOutcome
+                ? `${awayTeamSpreadOutcome.point}`
+                : "Outcome not found";
+
+            //console.log(displayAwayTeamSpread);
+
+            const displayHomeTeamSpread =
+              homeTeamSpreadOutcome && homeTeamSpreadOutcome.point >= 0
+                ? `+${homeTeamSpreadOutcome.point}`
+                : homeTeamSpreadOutcome
+                ? `${homeTeamSpreadOutcome.point}`
+                : "Outcome not found";
+
+            //console.log(displayHomeTeamSpread);
+
             // Check if both outcome objects are found
             const oddsText =
               awayTeamOutcome && homeTeamOutcome ? (
-                <>
-                  <span className="text-dark">{match.away_team}:</span>{" "}
-                  <span className="text-success">[{displayAwayTeamOdds}]</span>{" "}
-                  <span className="text-dark">@</span> <br />
-                  <span className="text-dark">{match.home_team}:</span>{" "}
-                  <span className="text-success">[{displayHomeTeamOdds}]</span>
-                </>
+                <div>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <p className="text-dark">{match.away_team}</p>
+                    </div>
+                    <div className="d-flex">
+                      <div className="odds-box my-1 mx-1">
+                        <p className="my-1">{displayAwayTeamOdds}</p>
+                      </div>
+                      <div className="odds-box-weird mt-1">
+                        <p className="my-1">{displayAwayTeamSpread}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <p className="text-dark">{match.home_team}</p>
+                    </div>
+                    <div className="d-flex">
+                      <div className="odds-box my-1 mx-1">
+                        <p className="my-1">{displayHomeTeamOdds}</p>
+                      </div>
+                      <div className="odds-box my-1">
+                        <p className="my-1">{displayHomeTeamSpread}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 "Outcome not found"
               );
@@ -119,9 +176,9 @@ const TodaysGames = ({ todaysOdds }) => {
                   target="_blank"
                   href={`https://sportsbook.draftkings.com/leagues/basketball/nba`}
                 >
-                  <div className="pe-5 text-center border border-dark p-3">
+                  <div className="pe-5 text-center border border-dark p-3 game-box">
                     <div className="game box">
-                      <h5 className="py-2 game-linky"> {oddsText}</h5>
+                      <div className="game-linky"> {oddsText}</div>
                     </div>
                   </div>
                 </a>

@@ -21,6 +21,7 @@ import BasicLinePlot from "../components/BasicLinePlot.jsx";
 import RebLinePlot from "../components/RebLinePlot.jsx";
 import AstLinePlot from "../components/AstLinePlot.jsx";
 import FgaLinePlot from "../components/FgaLinePlot.jsx";
+import TeamAvgTable from "../components/TeamAvgTable.jsx";
 
 export default function Home() {
   const currentDate = new Date();
@@ -52,6 +53,7 @@ export default function Home() {
   //const [todaysGames, setTodaysGames] = useState([]);
   const [todaysOdds, setTodaysOdds] = useState([]);
   const [loadingStats, setLoadingStats] = useState(false);
+  const [teamStats, setTeamStats] = useState("");
 
   const ODDS_API_KEY = "216f6eccca571511c81d63a2f4795d07";
   const currentDate2 = new Date();
@@ -72,7 +74,7 @@ export default function Home() {
   const [allteams, { isLoadingAllTeams, errorAllTeams }] =
     useAllTeamsMutation();
 
-  //console.log(loadingStats);
+  //console.log(teamStats);
 
   const handleSearch_2 = async () => {
     try {
@@ -247,6 +249,9 @@ export default function Home() {
             isHomeAwayChecked={isHomeAwayChecked}
             handleHomeAwayChecked={handleHomeAwayChecked}
             player={player}
+            stats={stats}
+            teamStats={teamStats}
+            setTeamStats={setTeamStats}
           />
           <div className="border border-dark mt-3"></div>
         </div>
@@ -274,6 +279,13 @@ export default function Home() {
           isLastFiveChecked={isLastFiveChecked}
           player={player}
           playerTitle={playerTitle}
+        />
+        <TeamAvgTable
+          teamStats={teamStats}
+          stats={stats}
+          teams={teams}
+          playerTitle={playerTitle}
+          averages={averages}
         />
         {stats.length === 0 ? (
           <p className="text-center welcome-text">

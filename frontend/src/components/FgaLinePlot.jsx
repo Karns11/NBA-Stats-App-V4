@@ -47,7 +47,7 @@ const BasicLinePlot = ({ stats, playerTitle, averages }) => {
             },
           ]}
           layout={{
-            title: `${playerTitle.first_name} ${playerTitle.last_name} Fga Game`,
+            title: `${playerTitle.first_name} ${playerTitle.last_name} Fga Per Game`,
             yaxis: { title: "Fga" },
             xaxis: { title: "Date" },
           }}
