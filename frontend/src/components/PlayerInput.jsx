@@ -25,7 +25,7 @@ function PlayerInput({ input, setInput, setStats, setPlayer, setPlayerTitle }) {
   return (
     <div className="column my-2">
       <div className="input-group px-5 mb-1">
-        <span className="input-group-text">Player</span>
+        <span className="input-group-text player-input">Player</span>
         <input
           type="text"
           className="form-control"

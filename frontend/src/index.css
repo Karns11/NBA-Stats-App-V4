@@ -70,8 +70,14 @@ body {
 }
 
 @media (max-width: 576px) {
-  .input-group-text {
-    width: 35%;
+  .date-input {
+    width: 19%;
+  }
+}
+
+@media (max-width: 576px) {
+  .player-input {
+    width: 19%;
   }
 }
 

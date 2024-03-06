@@ -34,7 +34,7 @@ function DateInput({
   return (
     <div className="column">
       <div className="input-group px-5 mb-4">
-        <span className="input-group-text">Since Date</span>
+        <span className="input-group-text date-input">Since</span>
         <input
           type="text"
           className="form-control"
