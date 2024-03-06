@@ -31,7 +31,7 @@ function PlayerInput({ input, setInput, setStats, setPlayer, setPlayerTitle }) {
           className="form-control"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Lebron James..."
+          placeholder="Lebron..."
         />
         <button
           onClick={() => {
