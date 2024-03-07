@@ -21,7 +21,8 @@ import NbaAppHome from "./screens/NbaAppHome.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<HomeScreen />} />
+      {/* <Route index={true} path="/" element={<HomeScreen />} /> */}
+      <Route index={true} path="/" element={<NbaAppHome />} />
       <Route path="/login" element={<LoginScreen />} /> {/* Add this line */}
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
