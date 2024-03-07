@@ -55,7 +55,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <LinkContainer to="/register">
+                  {/* <LinkContainer to="/register">
                     <Nav.Link>
                       <FaSignOutAlt /> Register
                     </Nav.Link>
@@ -64,7 +64,7 @@ const Header = () => {
                     <Nav.Link>
                       <FaSignInAlt /> Sign In
                     </Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer> */}
                 </>
               )}
             </Nav>
