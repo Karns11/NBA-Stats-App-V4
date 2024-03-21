@@ -55,7 +55,7 @@ export default function Home() {
   const [loadingStats, setLoadingStats] = useState(false);
   const [teamStats, setTeamStats] = useState("");
 
-  const ODDS_API_KEY = "216f6eccca571511c81d63a2f4795d07";
+  const ODDS_API_KEY = "2bbe5b51f58830c70f011626fbea0585";
   const currentDate2 = new Date();
   currentDate2.setDate(currentDate2.getDate() + 1);
   const usefulFormattedDate = currentDate2.toISOString().substring(0, 10);
