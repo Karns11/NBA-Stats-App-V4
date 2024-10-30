@@ -291,15 +291,7 @@ export default function Home() {
           averages={averages}
         />
         {stats.length === 0 ? (
-          <p className="text-center welcome-text">
-            Welcome to Alley-Oop Analytics! This platform is crafted to enhance
-            your sports betting decisions by providing comprehensive insights
-            into NBA player statistics. Simply begin by typing the name of any
-            NBA player, and select from the dropdown menu. Stay tuned for
-            ongoing updates as we continue to introduce new features to elevate
-            your user experience! *Don't forget to view the visualizations that
-            generate beneath the stats table!
-          </p>
+          <></>
         ) : loadingStats == true ? (
           <Loader />
         ) : (
