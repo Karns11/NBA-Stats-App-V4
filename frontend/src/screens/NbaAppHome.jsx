@@ -42,7 +42,7 @@ export default function Home() {
   const [playerTitle, setPlayerTitle] = useState([]);
   //const [playerId, setPlayerId] = useState("");
   const [input, setInput] = useState("");
-  const [StartDateInput, setStartDateInput] = useState("2023-10-24"); //need to update very year!!!!
+  const [StartDateInput, setStartDateInput] = useState("2024-10-22"); //need to update very year!!!!
   const [endDateInput, setEndDateInput] = useState(formattedDate);
   const [isChecked, setIsChecked] = useState(false);
   const [isLastFiveChecked, setIsLastFiveChecked] = useState(false);
