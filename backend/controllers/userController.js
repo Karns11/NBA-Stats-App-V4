@@ -115,7 +115,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@access  Private
 const searchPlayer = asyncHandler(async (req, res) => {
   // Set your API key
-  const API_KEY = "1d80b1e6-c99c-4d98-b71f-24772331a263";
+  const API_KEY = "adf90887-015a-4a02-86de-2b09cbe05628";
 
   // Set the headers with the API key
   const headers = {
@@ -143,7 +143,7 @@ const searchPlayer = asyncHandler(async (req, res) => {
 //@access  Private
 const getPlayerStats = asyncHandler(async (req, res) => {
   // Set your API key
-  const API_KEY = "1d80b1e6-c99c-4d98-b71f-24772331a263";
+  const API_KEY = "adf90887-015a-4a02-86de-2b09cbe05628";
 
   // Set the headers with the API key
   const headers = {
@@ -174,7 +174,7 @@ const getPlayerStats = asyncHandler(async (req, res) => {
 //@access  Private
 const getPlayerSeasonAvg = asyncHandler(async (req, res) => {
   // Set your API key
-  const API_KEY = "1d80b1e6-c99c-4d98-b71f-24772331a263";
+  const API_KEY = "adf90887-015a-4a02-86de-2b09cbe05628";
 
   // Set the headers with the API key
   const headers = {
@@ -185,7 +185,7 @@ const getPlayerSeasonAvg = asyncHandler(async (req, res) => {
   //console.log(player);
   axios
     .get(
-      `https://api.balldontlie.io/v1/season_averages?season=${season}&player_ids[]=${playerId}`,
+      `https://api.balldontlie.io/v1/season_averages?season=${season}&player_id=${playerId}`,
       {
         headers,
       }
@@ -205,7 +205,7 @@ const getPlayerSeasonAvg = asyncHandler(async (req, res) => {
 //@access  Private
 const getTeams = asyncHandler(async (req, res) => {
   // Set your API key
-  const API_KEY = "1d80b1e6-c99c-4d98-b71f-24772331a263";
+  const API_KEY = "adf90887-015a-4a02-86de-2b09cbe05628";
 
   // Set the headers with the API key
   const headers = {

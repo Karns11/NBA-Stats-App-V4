@@ -183,7 +183,7 @@ function StatsTable({
   const sortedStats = [...stats].sort((a, b) =>
     a.game.date > b.game.date ? -1 : 1
   );
-  //console.log(isLoadingStats);
+  //console.log(averages);
   //console.log(playerTitle.length);
 
   return (

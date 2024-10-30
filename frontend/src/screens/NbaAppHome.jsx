@@ -30,6 +30,7 @@ export default function Home() {
 
   const displayYear =
     currentMonth >= 1 && currentMonth <= 8 ? currentYear - 1 : currentYear;
+  //console.log(displayYear);
 
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -90,11 +91,12 @@ export default function Home() {
           playerId: player.id,
           StartDateInput,
         };
+        //console.log(playerData);
         setLoadingStats(true);
         const result_stats = await playerStats(playerData);
         setLoadingStats(false);
+        //console.log(result_stats.data.data);
         setStats(result_stats.data.data);
-        //console.log(isLoadingStats);
 
         setPlayerTitle(player);
 
@@ -103,7 +105,7 @@ export default function Home() {
           season: displayYear,
         };
         const result_seasonAvg = await playerSeasonAvg(playerAvgData);
-        //console.log(result_seasonAvg.data.data);
+        //console.log(result_seasonAvg);
         setAverages(result_seasonAvg.data.data[0]);
 
         const result_allTeams = await allteams();
@@ -162,6 +164,7 @@ export default function Home() {
       }
     };
     if (input.length > 3) {
+      //console.log(input);
       handleAllPlayerSearch(input);
     } else {
       setAllPlayers([]);
