@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodaysGames = ({ todaysOdds }) => {
-  let weekNum = 20;
+  let weekNum = 2;
 
   const currentDate = new Date();
 
