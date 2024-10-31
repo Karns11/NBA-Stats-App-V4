@@ -25,15 +25,6 @@ const TodaysGames = ({ todaysOdds }) => {
 
   return (
     <div>
-      <p className="text-center pt-3 pb-3">
-        Welcome to Alley-Oop Analytics! This platform is crafted to enhance your
-        sports betting decisions by providing comprehensive insights into NBA
-        player statistics. Simply begin by typing the name of any NBA player,
-        and select from the dropdown menu. Stay tuned for ongoing updates as we
-        continue to introduce new features to elevate your user experience!
-        *Don't forget to view the visualizations that generate beneath the stats
-        table!
-      </p>
       <h1 className="text-center mt-3">Week {weekNum}</h1>
       {todaysOdds && <h5 className="ml-3 pb-4">Upcoming Games </h5>}
 

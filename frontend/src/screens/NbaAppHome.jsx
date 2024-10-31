@@ -12,6 +12,7 @@ import LastFiveAvg from "../components/LastFiveAvg.jsx";
 import TodaysGames from "../components/TodaysGames.jsx";
 import HomeAwayTable from "../components/HomeAwayTable.jsx";
 import DK from "../assets/DKLogo.png";
+import EX from "../assets/NBAAppEx.png";
 import { useSearchPlayerMutation } from "../slices/usersApiSlice";
 import { usePlayerStatsMutation } from "../slices/usersApiSlice";
 import { usePlayerSeasonAvgMutation } from "../slices/usersApiSlice";
@@ -195,18 +196,29 @@ export default function Home() {
         </Routes>
       </BrowserRouter> */}
       <div className="container">
-        <TodaysGames todaysOdds={todaysOdds} />
+        {/* <TodaysGames todaysOdds={todaysOdds} /> */}
         {/* <h1 className='text-center pt-3'>{StartDateInput.substring(0,4)}-{endDateInput.substring(0,4)} Season Stats</h1> */}
-        <div className="d-flex align-items-center justify-content-center">
+        {/* <div className="d-flex align-items-center justify-content-center">
           {todaysOdds.length > 0 && (
             <h5 className="text-center me-3">Odds Powered By</h5>
           )}
           <div>
             {todaysOdds.length > 0 && <img className="dk-logo" src={DK} />}
           </div>
-        </div>
+        </div> */}
+        <p className="text-center pt-3 pb-3">
+          Welcome to Alley-Oop Analytics! This platform is designed to give you
+          in-depth insights into NBA player statistics, helping you make more
+          informed decisions and dive deeper into the game. Simply start by
+          typing the name of any NBA player and select from the dropdown menu.
+          Check back regularly for new features to enhance your experience! Be
+          sure to explore the dynamic visualizations that appear beneath the
+          stats table!
+        </p>
+        <div className="border border-dark mt-5 mb-3"></div>
         {todaysOdds.length > 0 && (
-          <div className="border border-dark mt-5 mb-3"></div>
+          // <div className="border border-dark mt-5 mb-3"></div>
+          <></>
         )}
 
         <h1 id="NBA-Stats" className="text-center pt-4">
@@ -352,6 +364,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {stats && stats.length === 0 ? (
+          <>
+            <h1>Example:</h1>
+            <img className="border" src={EX} />
+          </>
+        ) : null}
       </div>
     </div>
   );
