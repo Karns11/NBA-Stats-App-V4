@@ -12,7 +12,7 @@ import LastFiveAvg from "../components/LastFiveAvg.jsx";
 import TodaysGames from "../components/TodaysGames.jsx";
 import HomeAwayTable from "../components/HomeAwayTable.jsx";
 import DK from "../assets/DKLogo.png";
-import EX from "../assets/NBAAppEx.png";
+import EX from "../assets/NBAAppEX.png";
 import { useSearchPlayerMutation } from "../slices/usersApiSlice";
 import { usePlayerStatsMutation } from "../slices/usersApiSlice";
 import { usePlayerSeasonAvgMutation } from "../slices/usersApiSlice";
